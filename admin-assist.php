@@ -126,22 +126,6 @@ function adminassist_save_settings() {
 add_action( 'update_option_looker_url', 'adminassist_save_settings' );
 add_action( 'update_option_hide_widget', 'adminassist_save_settings' );
 
-// Force the widget to the top left position
-function adminassist_force_dashboard_widget_position() {
-    global $wp_meta_boxes;
-
-    // Get the widget
-    $widget = $wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'];
-
-    // Remove the widget from its current position
-    unset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget']);
-
-    // Add the widget to the top left position
-    $wp_meta_boxes['dashboard']['side']['high']['adminassist_dashboard_widget'] = $widget;
-}
-
-add_action('wp_dashboard_setup', 'adminassist_force_dashboard_widget_position');
-
 // Add the dashboard widget
 function adminassist_add_dashboard_widget() {
     $hide_widget = get_option( 'hide_widget', 'no' );
@@ -158,6 +142,9 @@ function adminassist_add_dashboard_widget() {
         </div>', // Widget title
         'adminassist_dashboard_widget_content' // Callback function to display the content
     );
+
+    // Reposition the widget to the top
+    add_action('wp_dashboard_setup', 'adminassist_force_dashboard_widget_position');
 }
 
 add_action( 'wp_dashboard_setup', 'adminassist_add_dashboard_widget' );
@@ -176,4 +163,17 @@ function adminassist_enqueue_dashboard_styles() {
 }
 
 add_action( 'admin_enqueue_scripts', 'adminassist_enqueue_dashboard_styles' );
-?>
+
+// Force the widget to the top left position
+function adminassist_force_dashboard_widget_position() {
+    global $wp_meta_boxes;
+
+    // Get the widget
+    $widget = $wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'];
+
+    // Remove the widget from its current position
+    unset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget']);
+
+    // Add the widget to the top left position
+    $wp_meta_boxes['dashboard']['side']['high']['adminassist_dashboard_widget'] = $widget;
+}

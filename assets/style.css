@@ -1,0 +1,16 @@
+.adminassist-view-report {
+    background-color: #DB4437; /* Google red */
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.adminassist-view-report:hover {
+    background-color: #c53727; /* Slightly darker red */
+    color: #ffffff; /* Keep text white */
+}

@@ -142,9 +142,6 @@ function adminassist_add_dashboard_widget() {
         </div>', // Widget title
         'adminassist_dashboard_widget_content' // Callback function to display the content
     );
-
-    // Reposition the widget to the top
-    add_action('wp_dashboard_setup', 'adminassist_force_dashboard_widget_position');
 }
 
 add_action( 'wp_dashboard_setup', 'adminassist_add_dashboard_widget' );
@@ -168,12 +165,13 @@ add_action( 'admin_enqueue_scripts', 'adminassist_enqueue_dashboard_styles' );
 function adminassist_force_dashboard_widget_position() {
     global $wp_meta_boxes;
 
-    // Get the widget
-    $widget = $wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'];
-
-    // Remove the widget from its current position
-    unset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget']);
-
-    // Add the widget to the top left position
-    $wp_meta_boxes['dashboard']['side']['high']['adminassist_dashboard_widget'] = $widget;
+    if (isset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'])) {
+        $widget = $wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'];
+        unset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget']);
+        $wp_meta_boxes['dashboard']['normal']['high']['adminassist_dashboard_widget'] = $widget;
+    }
 }
+
+add_action('wp_network_dashboard_setup', 'adminassist_force_dashboard_widget_position');
+add_action('wp_user_dashboard_setup', 'adminassist_force_dashboard_widget_position');
+add_action('wp_dashboard_setup', 'adminassist_force_dashboard_widget_position');

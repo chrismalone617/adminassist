@@ -90,6 +90,7 @@ function adminassist_settings_section_callback() {
 function adminassist_looker_url_callback() {
     $looker_url = get_option( 'looker_url', '' );
     echo '<input type="url" id="looker_url" name="looker_url" value="' . esc_attr( $looker_url ) . '" class="regular-text ltr" />';
+    echo '<p>Click <a href="https://lookerstudio.google.com/" target="_blank">here</a> to go to Looker Studio.</p>';
 }
 
 function adminassist_hide_widget_callback() {
@@ -148,10 +149,13 @@ add_action( 'wp_dashboard_setup', 'adminassist_add_dashboard_widget' );
 
 function adminassist_dashboard_widget_content() {
     $looker_url = get_option( 'looker_url', '' );
-    ?>
-    <p>The Google Analytics report provides detailed insights into your website's performance, user behavior, and traffic sources. Utilize this data to enhance your online strategy and achieve your business goals.</p>
-    <a href="<?php echo esc_url( $looker_url ); ?>" class="adminassist-view-report" target="_blank">View Analytics Report</a>
-    <?php
+
+    if ( empty( $looker_url ) ) {
+        echo '<p><strong>You haven\'t set your Looker Studio Report URL. <a href="' . esc_url( admin_url( 'options-general.php#looker_url' ) ) . '" style="color: #DB4437; font-weight: bold;">Click here</a> to set it now.</strong></p>';
+    } else {
+        echo '<p>The Google Analytics report provides detailed insights into your website\'s performance, user behavior, and traffic sources. Utilize this data to enhance your online strategy and achieve your business goals.</p>';
+        echo '<a href="' . esc_url( $looker_url ) . '" class="adminassist-view-report" target="_blank">View Analytics Report</a>';
+    }
 }
 
 // Enqueue custom styles

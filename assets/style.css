@@ -18,3 +18,7 @@
     background-color: #c53727; /* Slightly darker red */
     color: #ffffff; /* Keep text white */
 }
+
+.adminassist-widget-container p {
+    text-align: center;
+}

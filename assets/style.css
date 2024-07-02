@@ -5,7 +5,7 @@
     text-align: center;
 }
 
-.adminassist-view-report {
+.adminassist-view-report, .adminassist-view-report:active, .adminassist-view-report:focus, .adminassist-view-report:visited {
     background-color: #DB4437; /* Google red */
     color: #ffffff;
     font-weight: bold;

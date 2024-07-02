@@ -1,3 +1,7 @@
+.adminassist-widget-container {
+    text-align: center;
+}
+
 .adminassist-view-report {
     background-color: #DB4437; /* Google red */
     color: #ffffff;
@@ -8,6 +12,7 @@
     border-radius: 4px;
     display: inline-block;
     margin-top: 10px;
+    margin: 0 auto; /* Center the button */
 }
 
 .adminassist-view-report:hover {

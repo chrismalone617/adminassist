@@ -126,6 +126,22 @@ function adminassist_save_settings() {
 add_action( 'update_option_looker_url', 'adminassist_save_settings' );
 add_action( 'update_option_hide_widget', 'adminassist_save_settings' );
 
+// Force the widget to the top left position
+function adminassist_force_dashboard_widget_position() {
+    global $wp_meta_boxes;
+
+    // Get the widget
+    $widget = $wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget'];
+
+    // Remove the widget from its current position
+    unset($wp_meta_boxes['dashboard']['normal']['core']['adminassist_dashboard_widget']);
+
+    // Add the widget to the top left position
+    $wp_meta_boxes['dashboard']['side']['high']['adminassist_dashboard_widget'] = $widget;
+}
+
+add_action('wp_dashboard_setup', 'adminassist_force_dashboard_widget_position');
+
 // Add the dashboard widget
 function adminassist_add_dashboard_widget() {
     $hide_widget = get_option( 'hide_widget', 'no' );
@@ -150,7 +166,7 @@ function adminassist_dashboard_widget_content() {
     $looker_url = get_option( 'looker_url', '' );
     ?>
     <p>The Google Analytics report provides detailed insights into your website's performance, user behavior, and traffic sources. Utilize this data to enhance your online strategy and achieve your business goals.</p>
-    <a href="<?php echo esc_url( $looker_url ); ?>" class="button button-primary adminassist-view-report">View Analytics Report</a>
+    <a href="<?php echo esc_url( $looker_url ); ?>" class="adminassist-view-report" target="_blank">View Analytics Report</a>
     <?php
 }
 

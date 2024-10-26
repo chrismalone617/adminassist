@@ -54,4 +54,4 @@ jobs:
         with:
           files: adminassist.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.ADMINASSIST }} # Ensure this token has the right permissions and change secret from GITHUB_TOKEN to your name
+          GITHUB_TOKEN: ${{ secrets.ADMINASSIS }} # Ensure this token has the right permissions and change secret from GITHUB_TOKEN to your name

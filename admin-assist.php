@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name:       AdminAssist
- * Description:       This plugin does all the admin things.
+ * Description:       AdminAssist's plugin description
  * Requires at least: 6.3.0
  * Requires PHP:      7.4
- * Version:           0.0.1
+ * Version:           0.1.0
  * Author:            admin
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,10 +13,31 @@
  * Website:           
  */
 
-// Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit; // Exit if accessed directly.
 }
+
+$plugin_prefix = 'ADMINASSIST';
+
+// Extract the version number
+$plugin_data = get_file_data(__FILE__, ['Version' => 'Version']);
+
+// Plugin Constants
+define($plugin_prefix . '_DIR', plugin_basename(__DIR__));
+define($plugin_prefix . '_BASE', plugin_basename(__FILE__));
+define($plugin_prefix . '_PATH', plugin_dir_path(__FILE__));
+define($plugin_prefix . '_VER', $plugin_data['Version']);
+define($plugin_prefix . '_CACHE_KEY', 'adminassist-cache-key-for-plugin');
+define($plugin_prefix . '_REMOTE_URL', 'https://plugins.withchris.dev/wp-content/uploads/downloads/7/info.json');
+
+require constant($plugin_prefix . '_PATH') . 'inc/update.php';
+
+new DPUpdateChecker(
+	constant($plugin_prefix . '_BASE'),
+	constant($plugin_prefix . '_VER'),
+	constant($plugin_prefix . '_CACHE_KEY'),
+	constant($plugin_prefix . '_REMOTE_URL'),
+);
 
 // Create the database table on plugin activation
 function adminassist_create_table() {

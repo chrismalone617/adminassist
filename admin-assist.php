@@ -5,7 +5,7 @@
  * Description:       AdminAssist's plugin description
  * Requires at least: 6.3.0
  * Requires PHP:      7.4
- * Version:           0.4.0
+ * Version:           0.5.0
  * Author:            admin
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -175,7 +175,7 @@ function adminassist_dashboard_widget_content() {
     if ( empty( $looker_url ) ) {
         echo '<p><strong>You haven\'t set your Looker Studio Report URL. <a href="' . esc_url( admin_url( 'options-general.php#looker_url' ) ) . '" style="color: #DB4437; font-weight: bold;">Click here</a> to set it now.</strong></p>';
     } else {
-        echo '<p>The Google Analytics report provides detailed insights into your website\'s performance, user behavior, and traffic sources. Utilize this data to enhance your online strategy and achieve your business goals.</p>';
+        echo '<p>The Google Analytics report provides detailed insights into your website\'s performance, user behavior, and traffic sources. Utilize this data to enhance your online strategy and achieve your business goals. <a href="https://support.google.com/analytics/answer/9212670?hl=en">Read more about how to use your Google Analtyics Insights.</a></p>';
         echo '<a href="' . esc_url( $looker_url ) . '" class="adminassist-view-report" target="_blank">View Analytics Report</a>';
     }
     echo '</div>';
